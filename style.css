@@ -1,0 +1,155 @@
+* {
+    /* box-sizing: border-box ensures that padding and borders are included
+       in the element's total width and height. */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f0f4f8; 
+}
+
+/*
+    CSS GRID for Main Page Layout:
+     We use Grid to create a single-column layout
+    that is easy to read on smaller screens.
+*/
+body {
+    display: grid;
+    grid-template-areas:
+        "header"
+        "nav"
+        "main"
+        "sidebar"
+        "footer";
+    grid-template-columns: 1fr; /* Defines one column that takes up all available width */
+    grid-template-rows: auto auto 1fr auto auto; /* Rows will automatically size to fit content, except for 'main' which takes up remaining space */
+    gap: 1.5rem; /* Creates space between the grid areas */
+    min-height: 100vh; /* Ensures the body always takes up at least the full viewport height */
+}
+
+/*
+    Placing elements into their named Grid areas.
+*/
+header {
+    grid-area: header;
+    background-color: #3f51b5; /* A vibrant header color */
+    color: #ffffff;
+    padding: 2rem;
+    text-align: center;
+}
+
+nav {
+    grid-area: nav;
+    background-color: #4a67b5;
+}
+
+main {
+    grid-area: main;
+    padding: 0 1.5rem;
+}
+
+aside {
+    grid-area: sidebar;
+    background-color: #e3f2fd;
+    padding: 1.5rem;
+    border-radius: 8px;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #3f51b5;
+    color: #ffffff;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+/*
+    FLEXBOX for Navigation:
+*/
+.flex-nav {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.flex-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.flex-nav a:hover {
+    background-color: #6a82fb;
+}
+
+/*
+    FLEXBOX for the Image Gallery:
+*/
+.flex-gallery-container {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 1rem; 
+    margin-top: 2rem;
+}
+
+.gallery-item {
+    background-color: #ffffff;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    flex: 1 1 250px;
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px;
+}
+
+
+/* Tablet View (min-width: 768px) */
+@media (min-width: 768px) {
+    body {
+        grid-template-areas:
+            "header header"
+            "nav nav"
+            "main sidebar"
+            "footer footer";
+        grid-template-columns: 2fr 1fr; 
+    }
+}
+@media (min-width: 1024px) {
+    body {
+        grid-template-areas:
+            "nav header"
+            "nav main"
+            "nav sidebar"
+            "nav footer";
+        grid-template-columns: 200px 1fr; /* Fixed 200px sidebar, rest for content */
+        grid-template-rows: auto 1fr auto auto;
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        padding-top: 2rem;
+    }
+
+    .flex-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding-left: 1rem;
+    }
+}
